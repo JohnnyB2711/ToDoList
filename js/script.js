@@ -1,6 +1,6 @@
 function LoadToDo() {
     const button_save = document.getElementsByName("button_save");
-    //const button_wrap = document.querySelector("wrap_button");
+    const button_wrap = document.getElementById("wrap_button");
     const input = document.querySelector("input[type='text']");
     const ul = document.querySelector("ul.tasks");
     const button_add = document.getElementsByName("button_add");
@@ -25,14 +25,9 @@ function LoadToDo() {
             CreateTask();
         }
     });
-/*    button_wrap.addEventListener("click",function(){
-        alert("fffffff");
-    })*/
-/*
     button_save.addEventListener('click', () => {
         localStorage.setItem('tasks', ul.innerHTML)
     })
-*/
 
     function DeleteTask(button){
         button.addEventListener("click",(event)=>{
@@ -41,7 +36,7 @@ function LoadToDo() {
         })
     }
 
-/*    document.getElementById('wrap_button').onclick=function WrapTasks() {
+    document.getElementById('wrap_button').onclick=function WrapTasks() {
         alert("fffffff");
     }
     button_wrap.click(function () {
@@ -49,5 +44,7 @@ function LoadToDo() {
     });
     function ShowTasks() {
 
-    }*/
+    }
 }
+
+document.addEventListener("DOMContentLoaded", LoadToDo);
