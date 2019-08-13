@@ -1,0 +1,43 @@
+.block_tasks{
+  margin-top: 50px;
+  ul{
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: pink;
+  }
+  .task{
+    display: flex;
+
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  }
+  .day{
+    font-size: 20px;
+    color: black;
+  }
+}
+li{
+  list-style-type: none;
+  border-bottom: 3px solid white;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.button_delete{
+  border: none;
+  width: 30px;
+  //background: url("../img/delete-button.png") no-repeat;
+  padding:0;
+
+
+}
+.text{
+  color: black;
+  font-size: 25px;
+}
+
+.osnov{
+  background: aquamarine;
+}
