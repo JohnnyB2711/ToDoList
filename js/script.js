@@ -1,52 +1,99 @@
 function LoadToDo() {
     const button_save = document.getElementsByName("button_save");
-    const button_wrap = document.getElementById("wrap_button");
-    const button_show = document.getElementById("show_button");
+    const button_wrap = document.getElementById("mon_button");
+    const monday_block = document.getElementById("monday");
     const input = document.querySelector("input[type='text']");
-    const ul = document.querySelector("ul.tasks");
     const button_add = document.getElementsByName("button_add");
-
+    const day_block = document.getElementById("day_block");
+    const day = document.querySelectorAll('.day_block > span.day');
+    let status_active;
 
     function CreateTask() {
-        const li = document.createElement("li");
-        const button_delete = document.createElement("button");
-        const span = document.createElement("span");
-        const task = document.createTextNode(input.value);
-        span.classList.add("text");
-        button_delete.classList.add("button_delete");
-        span.append(task);
-        li.append(span, button_delete);
-        ul.append(li);
-        DeleteTask(button_delete)
+        if (status_active) {
+            //const block = document.querySelector('span.active');
+            const ul = document.querySelector('span.active > ul')
+            const li = document.createElement("li");
+            const button_delete = document.createElement("button");
+            const span = document.createElement("span");
+            const task = document.createTextNode(input.value);
+            span.classList.add("text");
+            button_delete.classList.add("button_delete");
+            span.append(task);
+            li.append(span, button_delete);
+            ul.append(li);
+
+            DeleteTask(button_delete)
+        } else {
+            alert('Выбери день недели!')
+        }
     }
 
-    input.addEventListener("keypress", (keyPressed) => {
+    input.addEventListener('keypress', (keyPressed) => {
         const keyEnter = 13;
         if (keyPressed.which == keyEnter) {
-            CreateTask();
+            if(input.value!==''){
+                CreateTask();
+                input.value = '';
+            }
+            else alert("Введите задачу")
         }
     });
 
     function DeleteTask(button) {
-        button.addEventListener("click", (event) => {
+        button.addEventListener('click', (event) => {
             button.parentElement.remove();
-            //event.stopPropagation();
+            event.stopPropagation();
         })
     }
 
-    function Wrap_Show_Tasks(button) {
-
-            button1.addEventListener("click", (event) => {
-                const day_tasks = button.parentElement.querySelector("ul.tasks");
-               // if (day_tasks.style.display = "block")
-                    day_tasks.style.display = "none";
-               // else
-              //      day_tasks.style.display = "block"
+    /*    function ActiveDay(day) {
+            day.addEventListener('click', (event) => {
+                day.classList.add("active")
             })
+        }*///
+    let select_day;
+    day_block.onclick = function (event) {
+        let day = event.target;
+        while (day != this) {
+            if (day.className == 'day') {
+                ActiveDay(day);
+                status_active = true;
+                const ul = document.querySelector('span.active > ul')
+                console.log(ul)
+                return;
+            }
+            day = day.parentNode;
+        }
+    };
+    function ActiveDay(day) {
+        if (select_day) {
+            select_day.classList.remove('active');
+        }
+        select_day = day;
+        select_day.classList.add('active');
     }
 
+    function Wrap_Show_Tasks(button) {
+        const day_tasks = button.parentElement.querySelector("ul.task");
+        day_tasks.style.display = 'block';
+        button.style.background='url("../wrap.png") no-repeat'
+        button.addEventListener('click', (event) => {
+            if (day_tasks.style.display == 'block')
+            {
+                day_tasks.style.display = 'none';
+                button.style.background='url("../show.png") no-repeat'
+            }
+            else
+            {
+                day_tasks.style.display = 'block';
+                button.style.background='url("../wrap.png") no-repeat'
+            }
+
+        })
+    }
 
     Wrap_Show_Tasks(button_wrap);
+
 }
 
 document.addEventListener("DOMContentLoaded", LoadToDo);
