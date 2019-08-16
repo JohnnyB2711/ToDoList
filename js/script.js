@@ -12,7 +12,8 @@ function LoadToDo() {
     //Функция создания задачи
     function CreateTask() {
         if (status_active) {
-            const ul = document.querySelector('span.active > ul')
+            const ul = document.querySelector('span.active > ul');
+            const label = document.createElement('label')
             const li = document.createElement("li");
             const button_delete = document.createElement("input");
             const checkbox = document.createElement("input");
@@ -26,7 +27,8 @@ function LoadToDo() {
             checkbox.classList.add('checkbox')
             checkbox_custom.classList.add("checkbox-custom")
             span.append(task);
-            li.append(checkbox, checkbox_custom, span, button_delete);
+            label.append(checkbox,checkbox_custom,span)
+            li.append(label, button_delete);
             ul.append(li);
 
             DeleteTask(button_delete)

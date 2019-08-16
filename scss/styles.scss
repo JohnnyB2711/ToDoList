@@ -1,67 +1,83 @@
-#day_block{
+#day_block {
   margin-top: 50px;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  .day{
+
+  .day {
     font-size: 20px;
     color: black;
     display: block;
     height: 300px;
     width: 40%;
-    margin:20px 20px 0 0;
+    margin: 20px 20px 0 0;
     box-sizing: content-box;
-    overflow:auto;
+    overflow: auto;
     background-color: cornsilk;
+
+    .text_day {
+      font-size: 30px;
+      margin: 10px auto;
+      display: block;
+    }
   }
-  scrollbar-thumb{
+
+  scrollbar-thumb {
     border: none;
   }
-  scrollbar-track{
+
+  scrollbar-track {
     border: #349eeb;
   }
+
   ul {
     margin: 0;
     padding: 0;
     display: block;
   }
 }
-.active{
+
+.active {
   //border: 2px solid #349eeb !important;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-li{
+
+li {
   list-style-type: none;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid cornsilk;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: antiquewhite;
 }
-.button_delete{
+
+.button_delete {
   border: none;
-  width: 20px;
+  width: 25px;
+  height: 25px;
   background: url("../img/delete-button.png") no-repeat;
   background-size: contain;
   background-position: center;
-  padding:0;
   cursor: pointer;
-}
-.text{
-  color: black;
-  font-size: 25px;
+  margin-right: 5px;
 }
 
-.osnov{
+.osnov {
   text-align: center;
-  h1{
+
+  h1 {
     margin: 0 auto;
   }
 }
-#enter{
-  width: 300px;
+
+#enter {
+  width: 80%;
   height: 30px;
   font-size: 18px;
+  margin-right: 10px;
 }
-#add_button{
+
+#add_button {
   background: url("../img/add2.png") no-repeat;
   background-size: contain;
   width: 40px;
@@ -69,7 +85,8 @@ li{
   border: none;
   cursor: pointer;
 }
-#save_button{
+
+#save_button {
   background: url("../img/save.png") no-repeat;
   background-size: contain;
   width: 40px;
@@ -77,42 +94,62 @@ li{
   border: none;
   cursor: pointer;
 }
-.wrap_button{
+
+.wrap_button {
   background: url("../img/wrap.png") no-repeat;
   background-size: contain;
   width: 20px;
   height: 20px;
   border: none;
 }
+
 .wrap_button:focus {
   outline: none;
 }
-.d{
+
+.d {
   background: #349eeb;
 }
-@mixin pseudo($display: block, $pos: absolute, $content: ''){
-  content: $content;
-  display: $display;
-  position: $pos;
-}
+label {
+  .text{
+    color: black;
+    font-size: 20px;
+  }
+  display: flex;
   .checkbox {
     display: none;
   }
   .checkbox-custom {
-    width:25px;
-    height:25px;
-    margin:5px 0 5px 5px;
+    width: 25px;
+    height: 25px;
+    margin: 5px 5px 5px 5px;
     cursor: pointer;
-    background:white;
+    background: transparent;
+    border: 1px solid black;
   }
+}
+/*.checkbox-custom, label {
+  display: flex;
+ border: none !important;
+}*/
 .checkbox:checked + .checkbox-custom:before {
-  @include pseudo;
+  content: '✔';
   top: 5px;
   right: 2px;
   bottom: 2px;
   left: 2px;
-  background: url(../img/check.png) no-repeat;
+  //background: url(../img/check.png) no-repeat;
+  background-size: contain;
 }
-.checkbox:checked ~ .checkbox-custom {
-  background:#dcdcdc;
+/*.checkbox:checked ~ .checkbox-custom {
+
+}*/
+.checkbox:checked ~ li {
+  background: cornsilk!important;
+}
+.buttons {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto 0;
 }

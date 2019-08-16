@@ -1,3 +1,4 @@
+@charset "UTF-8";
 #day_block {
   margin-top: 50px;
   display: flex;
@@ -13,6 +14,10 @@
     box-sizing: content-box;
     overflow: auto;
     background-color: cornsilk; }
+    #day_block .day .text_day {
+      font-size: 30px;
+      margin: 10px auto;
+      display: block; }
   #day_block scrollbar-thumb {
     border: none; }
   #day_block scrollbar-track {
@@ -27,22 +32,21 @@
 
 li {
   list-style-type: none;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid cornsilk;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center;
+  background: antiquewhite; }
 
 .button_delete {
   border: none;
-  width: 20px;
+  width: 25px;
+  height: 25px;
   background: url("../img/delete-button.png") no-repeat;
   background-size: contain;
   background-position: center;
-  padding: 0;
-  cursor: pointer; }
-
-.text {
-  color: black;
-  font-size: 25px; }
+  cursor: pointer;
+  margin-right: 5px; }
 
 .osnov {
   text-align: center; }
@@ -50,9 +54,10 @@ li {
     margin: 0 auto; }
 
 #enter {
-  width: 300px;
+  width: 80%;
   height: 30px;
-  font-size: 18px; }
+  font-size: 18px;
+  margin-right: 10px; }
 
 #add_button {
   background: url("../img/add2.png") no-repeat;
@@ -83,25 +88,41 @@ li {
 .d {
   background: #349eeb; }
 
-.checkbox {
-  display: none; }
+label {
+  display: flex; }
+  label .text {
+    color: black;
+    font-size: 20px; }
+  label .checkbox {
+    display: none; }
+  label .checkbox-custom {
+    width: 25px;
+    height: 25px;
+    margin: 5px 5px 5px 5px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid black; }
 
-.checkbox-custom {
-  width: 25px;
-  height: 25px;
-  margin: 5px 0 5px 5px;
-  cursor: pointer;
-  background: white; }
-
+/*.checkbox-custom, label {
+  display: flex;
+ border: none !important;
+}*/
 .checkbox:checked + .checkbox-custom:before {
-  content: "";
-  display: block;
-  position: absolute;
+  content: '✔';
   top: 5px;
   right: 2px;
   bottom: 2px;
   left: 2px;
-  background: url(../img/check.png) no-repeat; }
+  background-size: contain; }
 
-.checkbox:checked ~ .checkbox-custom {
-  background: #dcdcdc; }
+/*.checkbox:checked ~ .checkbox-custom {
+
+}*/
+.checkbox:checked ~ li {
+  background: cornsilk !important; }
+
+.buttons {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto 0; }
