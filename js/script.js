@@ -8,6 +8,7 @@ function LoadToDo() {
     const day = document.querySelectorAll('.day_block > span.day');
     let status_active;
 
+
     function CreateTask() {
         if (status_active) {
             //const block = document.querySelector('span.active');
@@ -31,11 +32,10 @@ function LoadToDo() {
     input.addEventListener('keypress', (keyPressed) => {
         const keyEnter = 13;
         if (keyPressed.which == keyEnter) {
-            if(input.value!==''){
+            if (input.value !== '') {
                 CreateTask();
                 input.value = '';
-            }
-            else alert("Введите задачу")
+            } else alert("Введите задачу")
         }
     });
 
@@ -59,41 +59,44 @@ function LoadToDo() {
                 ActiveDay(day);
                 status_active = true;
                 const ul = document.querySelector('span.active > ul')
-                console.log(ul)
                 return;
             }
-            day = day.parentNode;
+            //day = day.parentNode;
         }
-    };
-    function ActiveDay(day) {
-        if (select_day) {
-            select_day.classList.remove('active');
-        }
-        select_day = day;
-        select_day.classList.add('active');
+        select_day.classList.remove('active')
     }
 
-    function Wrap_Show_Tasks(button) {
-        const day_tasks = button.parentElement.querySelector("ul.task");
-        day_tasks.style.display = 'block';
-        button.style.background='url("../wrap.png") no-repeat'
-        button.addEventListener('click', (event) => {
-            if (day_tasks.style.display == 'block')
-            {
-                day_tasks.style.display = 'none';
-                button.style.background='url("../show.png") no-repeat'
+        function ActiveDay(day) {
+            if (select_day) {
+                select_day.classList.remove('active');
+                // console.log(day.classList)
             }
-            else
-            {
+            select_day = day;
+            select_day.classList.add('active');
+            // console.log(day.classList);
+        }
+
+        /*    function Wrap_Show_Tasks(button) {
+                const day_tasks = button.parentElement.querySelector("ul.task");
                 day_tasks.style.display = 'block';
                 button.style.background='url("../wrap.png") no-repeat'
-            }
+                button.addEventListener('click', (event) => {
+                    if (day_tasks.style.display == 'block')
+                    {
+                        day_tasks.style.display = 'none';
+                        button.style.background='url("../show.png") no-repeat'
+                    }
+                    else
+                    {
+                        day_tasks.style.display = 'block';
+                        button.style.background='url("../wrap.png") no-repeat'
+                    }
 
-        })
+                })
+            }*/
+
+        // Wrap_Show_Tasks(button_wrap);
+
     }
 
-    Wrap_Show_Tasks(button_wrap);
-
-}
-
-document.addEventListener("DOMContentLoaded", LoadToDo);
+    document.addEventListener("DOMContentLoaded", LoadToDo);
