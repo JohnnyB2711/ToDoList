@@ -115,10 +115,7 @@ label {
   left: 2px;
   background-size: contain; }
 
-/*.checkbox:checked ~ .checkbox-custom {
-
-}*/
-.checkbox:checked ~ li {
+.el {
   background: cornsilk !important; }
 
 .buttons {

@@ -141,10 +141,8 @@ label {
   //background: url(../img/check.png) no-repeat;
   background-size: contain;
 }
-/*.checkbox:checked ~ .checkbox-custom {
 
-}*/
-.checkbox:checked ~ li {
+.el {
   background: cornsilk!important;
 }
 .buttons {
