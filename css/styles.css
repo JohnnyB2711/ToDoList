@@ -49,21 +49,21 @@ input [type=text] {
   width: 300px; }
 
 #add_button {
-  background: url("../add2.png") no-repeat;
+  background: url("../img/add2.png") no-repeat;
   background-size: contain;
   width: 40px;
   height: 40px;
   border: none; }
 
 #save_button {
-  background: url("../save.png") no-repeat;
+  background: url("../img/save.png") no-repeat;
   background-size: contain;
   width: 40px;
   height: 40px;
   border: none; }
 
 .wrap_button {
-  background: url("../wrap.png") no-repeat;
+  background: url("../img/wrap.png") no-repeat;
   background-size: contain;
   width: 20px;
   height: 20px;
