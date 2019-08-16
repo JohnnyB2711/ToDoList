@@ -73,7 +73,7 @@ function LoadToDo() {
     let select_day;
     day_block.onclick = function (event) {
         let day = event.target;
-        while (day != this) {
+        while (day  != this) {
             if (day.className == 'day') {
                 ActiveDay(day);
                 status_active = true;
