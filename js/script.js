@@ -14,13 +14,19 @@ function LoadToDo() {
         if (status_active) {
             const ul = document.querySelector('span.active > ul')
             const li = document.createElement("li");
-            const button_delete = document.createElement("button");
+            const button_delete = document.createElement("input");
+            const checkbox = document.createElement("input");
+            const checkbox_custom = document.createElement("span");
             const span = document.createElement("span");
             const task = document.createTextNode(input.value);
             span.classList.add("text");
+            checkbox.setAttribute('type', 'checkbox');
+            button_delete.setAttribute('type', 'button');
             button_delete.classList.add("button_delete");
+            checkbox.classList.add('checkbox')
+            checkbox_custom.classList.add("checkbox-custom")
             span.append(task);
-            li.append(span, button_delete);
+            li.append(checkbox, checkbox_custom, span, button_delete);
             ul.append(li);
 
             DeleteTask(button_delete)
@@ -29,9 +35,9 @@ function LoadToDo() {
         }
     }
     //Добавление по нажатию кнопки
-    add_button.addEventListener('click',(event)=>{
-            NewTask()
-    })
+    add_button.addEventListener('click', (event) => {
+        NewTask()
+    });
     //Добавление по нажатию "Enter"
     input.addEventListener('keypress', (keyPressed) => {
         const keyEnter = 13;
@@ -42,8 +48,17 @@ function LoadToDo() {
     //Функция проверки корректности ввода задачи
     function NewTask() {
         if (input.value !== '') {
-            CreateTask();
-            input.value = '';
+            const ul = document.querySelector('span.active > ul');
+            if (!ul) {
+                const ul = document.createElement('ul');
+                const block = document.querySelector('span.active');
+                block.append(ul);
+                CreateTask();
+                input.value = '';
+            } else {
+                CreateTask();
+                input.value = '';
+            }
         } else alert("Введите задачу")
     }
     //Функция удаления задачи
@@ -53,8 +68,6 @@ function LoadToDo() {
             event.stopPropagation();
         })
     }
-
-
     let select_day;
     day_block.onclick = function (event) {
         let day = event.target;
@@ -65,7 +78,7 @@ function LoadToDo() {
                 const ul = document.querySelector('span.active > ul')
                 return;
             }
-            //day = day.parentNode;
+            day = day.parentNode;
         }
         select_day.classList.remove('active')
     }
@@ -73,11 +86,9 @@ function LoadToDo() {
     function ActiveDay(day) {
         if (select_day) {
             select_day.classList.remove('active');
-            // console.log(day.classList)
         }
         select_day = day;
         select_day.classList.add('active');
-        // console.log(day.classList);
     }
 
     /*    function Wrap_Show_Tasks(button) {

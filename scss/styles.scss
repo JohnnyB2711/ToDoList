@@ -3,16 +3,22 @@
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: cornsilk;
   .day{
     font-size: 20px;
     color: black;
     display: block;
     height: 300px;
-    width: 20%;
+    width: 40%;
     margin:20px 20px 0 0;
-    border: 1px solid black;
     box-sizing: content-box;
+    overflow:auto;
+    background-color: cornsilk;
+  }
+  scrollbar-thumb{
+    border: none;
+  }
+  scrollbar-track{
+    border: #349eeb;
   }
   ul {
     margin: 0;
@@ -21,7 +27,7 @@
   }
 }
 .active{
-  border: 2px solid #349eeb !important;
+  //border: 2px solid #349eeb !important;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 li{
@@ -33,12 +39,11 @@ li{
 .button_delete{
   border: none;
   width: 20px;
-  background: url("../delete-button.png") no-repeat;
+  background: url("../img/delete-button.png") no-repeat;
   background-size: contain;
   background-position: center;
   padding:0;
-
-
+  cursor: pointer;
 }
 .text{
   color: black;
@@ -51,8 +56,10 @@ li{
     margin: 0 auto;
   }
 }
-input [type=text]{
+#enter{
   width: 300px;
+  height: 30px;
+  font-size: 18px;
 }
 #add_button{
   background: url("../img/add2.png") no-repeat;
@@ -60,6 +67,7 @@ input [type=text]{
   width: 40px;
   height: 40px;
   border: none;
+  cursor: pointer;
 }
 #save_button{
   background: url("../img/save.png") no-repeat;
@@ -67,6 +75,7 @@ input [type=text]{
   width: 40px;
   height: 40px;
   border: none;
+  cursor: pointer;
 }
 .wrap_button{
   background: url("../img/wrap.png") no-repeat;
@@ -80,4 +89,30 @@ input [type=text]{
 }
 .d{
   background: #349eeb;
+}
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+  .checkbox {
+    display: none;
+  }
+  .checkbox-custom {
+    width:25px;
+    height:25px;
+    margin:5px 0 5px 5px;
+    cursor: pointer;
+    background:white;
+  }
+.checkbox:checked + .checkbox-custom:before {
+  @include pseudo;
+  top: 5px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  background: url(../img/check.png) no-repeat;
+}
+.checkbox:checked ~ .checkbox-custom {
+  background:#dcdcdc;
 }
