@@ -60,7 +60,6 @@ function LoadToDo() {
             }
         }
     }
-
     LoadFromLS();
     //Добавление по нажатию кнопки
     add_button.addEventListener('click', (event) => {
@@ -73,7 +72,6 @@ function LoadToDo() {
             NewTask()
         }
     });
-
     //Функция проверки корректности ввода задачи
     function NewTask() {
         if (status_active) {
@@ -98,7 +96,6 @@ function LoadToDo() {
             label.parentElement.style.background = 'cornsilk';
         })
     }
-
     let select_day;
     day_block.onclick = function (event) {
         let day = event.target;
@@ -113,8 +110,7 @@ function LoadToDo() {
             day = day.parentNode;
         }
         select_day.classList.remove('active')
-    }
-
+    };
     function ActiveDay(day) {
         if (select_day) {
             select_day.classList.remove('active');

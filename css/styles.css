@@ -50,6 +50,12 @@ li {
 
 .osnov {
   text-align: center; }
+  .osnov .header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white; }
   .osnov h1 {
     margin: 0 auto; }
 
