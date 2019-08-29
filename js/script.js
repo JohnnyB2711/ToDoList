@@ -1,5 +1,4 @@
 function LoadToDo() {
-    const monday_block = document.getElementById("monday");
     const input = document.querySelector("input[type='text']");
     const button_add = document.getElementsByName("button_add");
     const day_block = document.getElementById("day_block");
