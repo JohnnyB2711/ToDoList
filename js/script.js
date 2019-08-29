@@ -50,7 +50,7 @@ function LoadToDo() {
             {
                 const ul=(day[i].lastChild);
                 console.log(ul);
-                localStorage.setItem(i,JSON.stringify("ul"))
+                localStorage.setItem(i,JSON.stringify(ul))
             }
             else {
                 localStorage.setItem(i,'пусто')
