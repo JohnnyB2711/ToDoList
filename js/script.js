@@ -4,6 +4,7 @@ function LoadToDo() {
     const day = document.querySelectorAll('span.day');
     const add_button = document.querySelector('#add_button');
     const save_button = document.querySelector('#save_button');
+    const remove_button = document.querySelector('#remove_button');
     let status_active;
     //const delete_button = document.querySelectorAll('.button_delete');
 
@@ -30,18 +31,20 @@ function LoadToDo() {
         DeleteTask();
         ActiveChesk(label)
     }
+
     //Функция удаления задачи
-    function DeleteTask(){
+    function DeleteTask() {
         const delete_button = document.querySelectorAll('.button_delete');
-        for(let button of delete_button){
-            button.addEventListener ("click",(event)=>{
+        for (let button of delete_button) {
+            button.addEventListener("click", (event) => {
                 button.parentElement.remove();
                 event.stopPropagation();
             });
         }
     }
+
     //Загрузка данных в LocalStorage
-    save_button.addEventListener('click', (event) => {
+    function LoadTasks() {
         let i;
         for (i = 0; i < day.length; i++) {
             if (day[i].querySelector('ul')) {
@@ -49,75 +52,87 @@ function LoadToDo() {
                 localStorage.setItem(i, ul.outerHTML);
             }
         }
-    });
-    //Функция считывания данных из LocalStorage
-    function LoadFromLS() {
-        let x;
-        for (x = 0; x < day.length; x++) {
-            if (localStorage.getItem(x)) {
-                day[x].insertAdjacentHTML('beforeend', localStorage.getItem(x));
-                DeleteTask()
-            }
-        }
     }
-    LoadFromLS();
-    //Добавление по нажатию кнопки
-    add_button.addEventListener('click', (event) => {
-        NewTask()
-    });
-    //Добавление по нажатию "Enter"
-    input.addEventListener('keypress', (keyPressed) => {
-        const keyEnter = 13;
-        if (keyPressed.which == keyEnter) {
-            NewTask()
-        }
-    });
-    //Функция проверки корректности ввода задачи
-    function NewTask() {
-        if (status_active) {
-            if (input.value !== '') {
-                const ul = document.querySelector('span.active > ul');
-                const block = document.querySelector('span.active');
-                if (!ul) {
-                    const ul = document.createElement('ul');
-                    block.append(ul);
-                    CreateTask();
-                    input.value = '';
-                } else {
-                    CreateTask();
-                    input.value = '';
+    save_button.addEventListener('click',LoadTasks);
+
+        //Функция считывания данных из LocalStorage
+        function LoadFromLS() {
+            let x;
+            for (x = 0; x < day.length; x++) {
+                if (localStorage.getItem(x)) {
+                    day[x].insertAdjacentHTML('beforeend', localStorage.getItem(x));
+                    DeleteTask()
                 }
-            } else alert("Введите задачу")
-        } else alert("Выбери день")
-    }
-
-    function ActiveChesk(label) {
-        label.addEventListener('click', (event) => {
-            label.parentElement.style.background = 'cornsilk';
-        })
-    }
-    let select_day;
-    day_block.onclick = function (event) {
-        let day = event.target;
-        while (day != this) {
-            if (day.className == 'day') {
-                ActiveDay(day);
-                status_active = true;
-                const ul = document.querySelector('span.active > ul')
-                return;
             }
-            status_active = false;
-            day = day.parentNode;
         }
-        select_day.classList.remove('active')
-    };
-    function ActiveDay(day) {
-        if (select_day) {
-            select_day.classList.remove('active');
-        }
-        select_day = day;
-        select_day.classList.add('active');
-    }
-}
+        LoadFromLS();
 
-document.addEventListener("DOMContentLoaded", LoadToDo);
+        //Очистка LS
+        function RemoveLS() {
+            localStorage.clear();
+            LoadFromLS()
+        }
+        remove_button.addEventListener('click', RemoveLS);
+        //Добавление по нажатию кнопки
+        add_button.addEventListener('click', (event) => {
+            NewTask()
+        });
+        //Добавление по нажатию "Enter"
+        input.addEventListener('keypress', (keyPressed) => {
+            const keyEnter = 13;
+            if (keyPressed.which == keyEnter) {
+                NewTask()
+            }
+        });
+
+        //Функция проверки корректности ввода задачи
+        function NewTask() {
+            if (status_active) {
+                if (input.value !== '') {
+                    const ul = document.querySelector('span.active > ul');
+                    const block = document.querySelector('span.active');
+                    if (!ul) {
+                        const ul = document.createElement('ul');
+                        block.append(ul);
+                        CreateTask();
+                        input.value = '';
+                    } else {
+                        CreateTask();
+                        input.value = '';
+                    }
+                } else alert("Введите задачу")
+            } else alert("Выбери день")
+        }
+
+        function ActiveChesk(label) {
+            label.addEventListener('click', (event) => {
+                label.parentElement.style.background = 'cornsilk';
+            })
+        }
+
+        let select_day;
+        day_block.onclick = function (event) {
+            let day = event.target;
+            while (day != this) {
+                if (day.className == 'day') {
+                    ActiveDay(day);
+                    status_active = true;
+                    const ul = document.querySelector('span.active > ul')
+                    return;
+                }
+                status_active = false;
+                day = day.parentNode;
+            }
+            select_day.classList.remove('active')
+        };
+
+        function ActiveDay(day) {
+            if (select_day) {
+                select_day.classList.remove('active');
+            }
+            select_day = day;
+            select_day.classList.add('active');
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", LoadToDo);

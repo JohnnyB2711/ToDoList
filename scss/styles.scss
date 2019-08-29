@@ -85,22 +85,24 @@ li {
   margin-right: 10px;
 }
 
+@mixin button ($background, $background-size, $width, $height, $border, $cursor){
+  background: $background no-repeat;
+  background-size: $background-size;
+  width: $width;
+  height: $height;
+  border: $border;
+  cursor: $cursor;
+}
+
 #add_button {
-  background: url("../img/add2.png") no-repeat;
-  background-size: contain;
-  width: 40px;
-  height: 40px;
-  border: none;
-  cursor: pointer;
+  @include button(url("../img/add2.png"),contain,40px,40px,none,pointer)
+}
+#remove_button{
+  @include button(url("../img/remove.png"),contain,40px,40px,none,pointer)
 }
 
 #save_button {
-  background: url("../img/save.png") no-repeat;
-  background-size: contain;
-  width: 40px;
-  height: 40px;
-  border: none;
-  cursor: pointer;
+  @include button(url("../img/save.png"),contain,40px,40px,none,pointer)
 }
 
 .wrap_button {
@@ -136,10 +138,6 @@ label {
     border: 1px solid black;
   }
 }
-/*.checkbox-custom, label {
-  display: flex;
- border: none !important;
-}*/
 .checkbox:checked + .checkbox-custom:before {
   content: '✔';
   top: 5px;

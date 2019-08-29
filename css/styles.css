@@ -73,6 +73,14 @@ li {
   border: none;
   cursor: pointer; }
 
+#remove_button {
+  background: url("../img/remove.png") no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer; }
+
 #save_button {
   background: url("../img/save.png") no-repeat;
   background-size: contain;
@@ -109,10 +117,6 @@ label {
     background: transparent;
     border: 1px solid black; }
 
-/*.checkbox-custom, label {
-  display: flex;
- border: none !important;
-}*/
 .checkbox:checked + .checkbox-custom:before {
   content: '✔';
   top: 5px;
