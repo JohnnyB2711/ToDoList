@@ -5,7 +5,7 @@ function LoadToDo() {
     const add_button = document.querySelector('#add_button');
     const save_button = document.querySelector('#save_button');
     let status_active;
-    const ul = document.querySelector("ul.main");
+    //const delete_button = document.querySelectorAll('.button_delete');
 
     //Функция создания задачи
     function CreateTask() {
@@ -27,8 +27,18 @@ function LoadToDo() {
         label.append(checkbox, checkbox_custom, span);
         li.append(label, button_delete);
         ul.append(li);
-        DeleteTask(button_delete);
+        DeleteTask();
         ActiveChesk(label)
+    }
+    //Функция удаления задачи
+    function DeleteTask(){
+        const delete_button = document.querySelectorAll('.button_delete');
+        for(let button of delete_button){
+            button.addEventListener ("click",(event)=>{
+                button.parentElement.remove();
+                event.stopPropagation();
+            });
+        }
     }
     //Загрузка данных в LocalStorage
     save_button.addEventListener('click', (event) => {
@@ -36,24 +46,17 @@ function LoadToDo() {
         for (i = 0; i < day.length; i++) {
             if (day[i].querySelector('ul')) {
                 const ul = (day[i].lastChild);
-                console.log(ul);
-                localStorage.setItem(i, ul.outerHTML)
+                localStorage.setItem(i, ul.outerHTML);
             }
-            /*            else {
-                            //localStorage.setItem(i,'')
-                            console.log(i)
-                        };*/
         }
-
-
     });
-
     //Функция считывания данных из LocalStorage
     function LoadFromLS() {
         let x;
         for (x = 0; x < day.length; x++) {
             if (localStorage.getItem(x)) {
-                day[x].insertAdjacentHTML('beforeend', localStorage.getItem(x))
+                day[x].insertAdjacentHTML('beforeend', localStorage.getItem(x));
+                DeleteTask()
             }
         }
     }
@@ -88,14 +91,6 @@ function LoadToDo() {
                 }
             } else alert("Введите задачу")
         } else alert("Выбери день")
-    }
-
-    //Функция удаления задачи
-    function DeleteTask(button) {
-        button.addEventListener('click', (event) => {
-            button.parentElement.remove();
-            event.stopPropagation();
-        })
     }
 
     function ActiveChesk(label) {
