@@ -6,6 +6,8 @@ function LoadToDo() {
     const save_button = document.querySelector('#save_button');
     const remove_button = document.querySelector('#remove_button');
     let status_active;
+    //const checkbox = document.querySelectorAll('checkbox-custom');
+
     //Шаблон создания задач
     function TemplateTasks(text) {
         const label = document.createElement('label');
@@ -22,16 +24,17 @@ function LoadToDo() {
         checkbox_custom.classList.add("checkbox-custom");
         span.append(text);
         label.append(checkbox, checkbox_custom, span);
+        ActiveCheck(label, checkbox);
         li.append(label, button_delete);
         return li;
     }
+
     //Функция создания задачи
     function CreateTask() {
         const ul = document.querySelector('span.active > ul');
         const task = document.createTextNode(input.value);
         ul.append(TemplateTasks(task));
         DeleteTask();
-        //ActiveChesk(label)
     }
 
     //Функция удаления задачи
@@ -47,13 +50,22 @@ function LoadToDo() {
 
     //Загрузка данных в LocalStorage
     function LoadTasks() {
-        let i;
+        let i, x;
+        let checkbox;
         for (i = 0; i < day.length; i++) {
             if (day[i].querySelector('ul')) {
                 const ul = (day[i].lastChild);
                 localStorage.setItem(i, ul.innerText);
+                let checkboxes = ul.querySelectorAll('.checkbox');
+                console.log(checkboxes);
+                for (x = 0; x < checkboxes.length; x++) {
+                    if (checkboxes[x].checked) {
+                        localStorage.setItem('day' + i + 'check' + x, 'true')
+                    }
+                }
             }
         }
+
     }
 
     save_button.addEventListener('click', LoadTasks);
@@ -63,18 +75,24 @@ function LoadToDo() {
         let x;
         for (x = 0; x < day.length; x++) {
             if (localStorage.getItem(x)) {
-                let a = localStorage.getItem(x);
-                let b = a.split('\n');
-                console.log(b);
+                let mas_task = localStorage.getItem(x).split('\n');
                 const ul = document.createElement('ul');
                 day[x].append(ul);
-                for (let i = 0; i < b.length; i++) {
-                    ul.append(TemplateTasks(b[i]))
+                for (let i = 0; i < mas_task.length; i++) {
+                    ul.append(TemplateTasks(mas_task[i]));
+                    let li = ul.querySelectorAll('li');
+                    let checkbox = li[i].querySelector('.checkbox')
+                    if (localStorage.getItem('day' + x + 'check' + i)) {
+                        checkbox.checked = 'checked';
+                        //ActiveCheck(li[i],checkbox)
+                    }
                 }
                 DeleteTask()
             }
+
         }
     }
+
     LoadFromLS();
 
     //Очистка LS
@@ -115,9 +133,13 @@ function LoadToDo() {
         } else alert("Выбери день")
     }
 
-    function ActiveChesk(label) {
-        label.addEventListener('click', (event) => {
-            label.parentElement.style.background = 'cornsilk';
+    function ActiveCheck(label, checkbox) {
+        label.addEventListener('click', function () {
+            if (checkbox.checked) {
+                label.parentElement.style.background = 'cornsilk'
+            } else {
+                label.parentElement.style.background = 'antiquewhite'
+            }
         })
     }
 
