@@ -62,6 +62,9 @@ function LoadToDo() {
                     if (checkboxes[x].checked) {
                         localStorage.setItem('day' + i + 'check' + x, 'true')
                     }
+                    else{
+                        localStorage.removeItem('day' + i + 'check' + x)
+                    }
                 }
             }
         }
@@ -70,6 +73,16 @@ function LoadToDo() {
 
     save_button.addEventListener('click', LoadTasks);
 
+//Функция изменения цвета task
+    function ActiveCheck(label, checkbox) {
+        label.addEventListener('click', function () {
+            if (checkbox.checked) {
+                label.style.background='cornsilk'
+            } else {
+                label.style.background='antiquewhite'
+            }
+        })
+    }
     //Функция считывания данных из LocalStorage
     function LoadFromLS() {
         let x;
@@ -81,10 +94,16 @@ function LoadToDo() {
                 for (let i = 0; i < mas_task.length; i++) {
                     ul.append(TemplateTasks(mas_task[i]));
                     let li = ul.querySelectorAll('li');
-                    let checkbox = li[i].querySelector('.checkbox')
+                    let checkbox = li[i].querySelector('.checkbox');
                     if (localStorage.getItem('day' + x + 'check' + i)) {
-                        checkbox.checked = 'checked';
-                        //ActiveCheck(li[i],checkbox)
+                        checkbox.checked='checked';
+                        ActiveCheck(li[i], checkbox);
+                        if (checkbox.checked){
+                            li[i].style.background='cornsilk';
+                        }
+                        else{
+                            li[i].style.background='antiquewhite';
+                        }
                     }
                 }
                 DeleteTask()
@@ -131,16 +150,6 @@ function LoadToDo() {
                 }
             } else alert("Введите задачу")
         } else alert("Выбери день")
-    }
-
-    function ActiveCheck(label, checkbox) {
-        label.addEventListener('click', function () {
-            if (checkbox.checked) {
-                label.parentElement.style.background = 'cornsilk'
-            } else {
-                label.parentElement.style.background = 'antiquewhite'
-            }
-        })
     }
 
     let select_day;
